@@ -12,8 +12,6 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.rey.material.widget.Slider;
-
 import java.util.ArrayList;
 import java.util.List;
 
