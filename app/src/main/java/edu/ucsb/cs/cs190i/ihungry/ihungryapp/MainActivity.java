@@ -139,8 +139,7 @@ public class MainActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                for (int i = 0; i < 7; i++) {
-                                    System.out.println(list[i] + " : " + booleans[i]);
+                                for (int i = 0; i < booleans.length; i++) {
                                     if (booleans[i]) {
                                         if (!mCheckedItems.contains(list[i])) {
                                             mCheckedItems.add(list[i]);
