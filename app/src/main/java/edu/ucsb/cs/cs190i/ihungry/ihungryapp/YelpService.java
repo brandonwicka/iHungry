@@ -53,6 +53,7 @@ public abstract class YelpService {
         consumer.setTokenWithSecret(token, tokenSecret);
         try {
             url = consumer.sign(url);
+            Log.v("URL", url);
             StringRequest stringRequest = new StringRequest(
                     com.android.volley.Request.Method.GET,
                     url,
@@ -91,9 +92,8 @@ public abstract class YelpService {
      * @return String
      */
     private static String generateURLString(edu.ucsb.cs.cs190i.ihungry.ihungryapp.Request request) {
-        StringBuilder builder = new StringBuilder("https://api.yelp.com/v2/search?term=restaurants&");
-        builder.append(String.format("ll=%f,%f&radius_filter=%f", request.latitude, request.longitude, request.radius));
-        if (request.filter != null) builder.append(String.format("&category_filter=%s", request.filter));
+        StringBuilder builder = new StringBuilder("https://api.yelp.com/v2/search?");
+        builder.append(String.format("term=restaurants%s&ll=%f,%f&radius_filter=%f", request.filter, request.latitude, request.longitude, request.radius));
         return builder.toString();
     }
 }

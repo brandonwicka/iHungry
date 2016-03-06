@@ -6,7 +6,7 @@ package edu.ucsb.cs.cs190i.ihungry.ihungryapp;
 public class RequestBuilder {
     private double latitude = 0.0;
     private double longitude = 0.0;
-    private String filter = null;
+    private String filter = "";
     private double radius = 0.0;
 
     public RequestBuilder() {}
@@ -52,20 +52,14 @@ public class RequestBuilder {
     }
 
     /**
-     * Sets the Request's filter term
+     * Sets the Request's filter term, needs to be comma separated, i.e. mexican,tacos,cheap
      * @param filter
      * @return RequestBuilder
      */
     public RequestBuilder filter(String filter) {
-        // Convert to Yelp accepted values
-        String f = filter.toLowerCase();
-        if (f.equals("indian")) {
-            f = "indpak";
-        }
-        if (f.equals("american")) {
-            f = "newamerican";
-        }
-        this.filter = f;
+        StringBuilder builder = new StringBuilder(",");
+        builder.append(filter.toLowerCase());
+        this.filter = builder.toString();
         return this;
     }
 }
