@@ -6,7 +6,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.DragEvent;
 import android.view.Menu;
 import android.view.View;
@@ -17,7 +16,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements YelpServiceResponse {
+public class MainActivity extends AppCompatActivity {
 
 
     private List<String> mCheckedItems;
@@ -97,22 +96,6 @@ public class MainActivity extends AppCompatActivity implements YelpServiceRespon
 
             }
         });
-
-        Request r = new RequestBuilder().latitude(34.407581).longitude(-119.844996).radius(1000).buildRequest();
-        YelpService.search(getApplicationContext(), r, this);
-    }
-
-    @Override
-    public void onSuccess(ArrayList<Restaurant> restaurants) {
-        for (Restaurant r:
-             restaurants) {
-            Log.v("Restaurant", r.toString());
-        }
-
-    }
-
-    @Override
-    public void onError(String errorMessage) {
 
     }
 
