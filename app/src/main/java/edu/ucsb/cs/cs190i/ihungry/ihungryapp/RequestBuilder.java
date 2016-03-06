@@ -57,7 +57,15 @@ public class RequestBuilder {
      * @return RequestBuilder
      */
     public RequestBuilder filter(String filter) {
-        this.filter = filter;
+        // Convert to Yelp accepted values
+        String f = filter.toLowerCase();
+        if (f.equals("indian")) {
+            f = "indpak";
+        }
+        if (f.equals("american")) {
+            f = "newamerican";
+        }
+        this.filter = f;
         return this;
     }
 }

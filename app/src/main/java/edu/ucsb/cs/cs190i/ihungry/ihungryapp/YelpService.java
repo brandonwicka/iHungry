@@ -1,7 +1,6 @@
 package edu.ucsb.cs.cs190i.ihungry.ihungryapp;
-import android.os.AsyncTask;
-import android.util.Log;
 
+import android.util.Log;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -12,7 +11,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Context;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
