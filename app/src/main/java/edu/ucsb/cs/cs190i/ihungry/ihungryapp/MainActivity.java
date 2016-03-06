@@ -19,10 +19,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private List<String> mCheckedItems;
-    private int checkedItemIndex;
-    private int checkedItemIndex2;
-    private String mCheckedItem;
-    private String mCheckedItem2;
+    private int mCheckedPriceIndex;
+    private int mCheckedStarsIndex;
+    private String mCheckedPrice;
+    private String mCheckedStars;
     final String[] list = new String[]{"American", "Chinese", "Mexican", "Italian", "Indian", "Japanese", "Korean"};
 
     @Override
@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         SeekBar slider = (SeekBar) findViewById(R.id.seekBar);
         slider.setProgress(25);
         mCheckedItems = new ArrayList<String>();
-        checkedItemIndex = 0;
-        checkedItemIndex2 = 0;
+        mCheckedPriceIndex = 0;
+        mCheckedStarsIndex = 0;
 
         typeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,49 +104,53 @@ public class MainActivity extends AppCompatActivity {
 
     private void showTypeDialog() {
 
-        boolean[] b = new boolean[] {false, false, false, false, false, false, false};
+        final boolean[] booleans = new boolean[] {false, false, false, false, false, false, false};
         for(int i = 0; i < mCheckedItems.size(); i++) {
             if((mCheckedItems.get(i)).equals("American"))
-                b[0] = true;
+                booleans[0] = true;
             else if((mCheckedItems.get(i)).equals("Chinese"))
-                b[1] = true;
+                booleans[1] = true;
             else if((mCheckedItems.get(i)).equals("Mexican"))
-                b[2] = true;
+                booleans[2] = true;
             else if((mCheckedItems.get(i)).equals("Italian"))
-                b[3] = true;
+                booleans[3] = true;
             else if((mCheckedItems.get(i)).equals("Indian"))
-                b[4] = true;
+                booleans[4] = true;
             else if((mCheckedItems.get(i)).equals("Japanese"))
-                b[5] = true;
+                booleans[5] = true;
             else if((mCheckedItems.get(i)).equals("Korean"))
-                b[6] = true;
+                booleans[6] = true;
         }
 
         createAlertDialogBuilder()
                 .setTitle("SELECT CATEGORIES")
                 .setMultiChoiceItems(list,
-                        b,
+                        booleans,
                         new DialogInterface.OnMultiChoiceClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                                if (isChecked) {
-                                    mCheckedItems.add(list[which]);
-                                } else {
-                                    mCheckedItems.remove(list[which]);
-                                }
-
+                                //despite there being no code here, do not remove
+                                //unless you know how to instantiate OnMultiChoiceClickerListener without this
                             }
                         })
-                        //.setNeutralButton("CANCEL", null)
-                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
+                .setNegativeButton("CANCEL", null)
                 .setPositiveButton(
                         "CONFIRM",
-                        null)
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                for (int i = 0; i < 7; i++) {
+                                    System.out.println(list[i] + " : " + booleans[i]);
+                                    if (booleans[i]) {
+                                        if (!mCheckedItems.contains(list[i])) {
+                                            mCheckedItems.add(list[i]);
+                                        }
+                                    } else {
+                                        mCheckedItems.remove(list[i]);
+                                    }
+                                }
+                            }
+                        })
 
                 .show();
     }
@@ -154,20 +158,30 @@ public class MainActivity extends AppCompatActivity {
     private void showPriceDialog() {
         final String[] list = new String[]{"$0-$10", "$10-$20", "$20-$50+"};
 
-        mCheckedItem = list[checkedItemIndex];
+        mCheckedPrice = list[mCheckedPriceIndex];
+
+        final int checked = mCheckedPriceIndex;
 
         createAlertDialogBuilder()
                 .setTitle("SELECT PRICE RANGE")
                 .setSingleChoiceItems(list,
-                        checkedItemIndex,
+                        mCheckedPriceIndex,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mCheckedItem = list[which];
-                                checkedItemIndex = which;
+                                mCheckedPrice = list[which];
+                                mCheckedPriceIndex = which;
                             }
                         })
-                .setNegativeButton("CANCEL", null)
+                .setNegativeButton("CANCEL",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mCheckedPrice = list[checked];
+                                mCheckedPriceIndex = checked;
+                            }
+                        }
+                )
                 .setPositiveButton(
                         "CONFIRM",
                         null
@@ -178,20 +192,30 @@ public class MainActivity extends AppCompatActivity {
     private void showRatingDialog() {
         final String[] list = new String[]{"5 STARS", "4 STARS", "3 STARS", "2 STARS", "1 STAR"};
 
-        mCheckedItem2 = list[checkedItemIndex2];
+        mCheckedStars = list[mCheckedStarsIndex];
+
+        final int checked = mCheckedStarsIndex;
 
         createAlertDialogBuilder()
                 .setTitle("SELECT RATING")
                 .setSingleChoiceItems(list,
-                        checkedItemIndex2,
+                        mCheckedStarsIndex,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mCheckedItem2 = list[which];
-                                checkedItemIndex2 = which;
+                                mCheckedStars = list[which];
+                                mCheckedStarsIndex = which;
                             }
                         })
-                .setNegativeButton("CANCEL", null)
+                .setNegativeButton("CANCEL",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mCheckedStars = list[checked];
+                                mCheckedStarsIndex = checked;
+                            }
+                        }
+                )
                 .setPositiveButton(
                         "CONFIRM",
                         null
