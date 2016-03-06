@@ -42,11 +42,11 @@ public class RequestBuilder {
     }
 
     /**
-     * Sets the Request's radius
+     * Sets the Request's radius in meters
      * @param radius
      * @return RequestBuilder
      */
-    public RequestBuilder radius(float radius) {
+    public RequestBuilder radius(double radius) {
         this.radius = radius;
         return this;
     }

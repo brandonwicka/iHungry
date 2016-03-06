@@ -31,6 +31,10 @@ public class Restaurant implements Serializable {
         mLatitude = latLng.latitude;
     }
 
+    /**
+     * Constructs a Restaurant from a JSONObject
+     * @param json
+     */
     public Restaurant(JSONObject json) {
         mName = json.optString("name");
         mObjectId = json.optString("id");
@@ -57,6 +61,11 @@ public class Restaurant implements Serializable {
         mUrl = json.optString("mobile_url");
     }
 
+    /**
+     * Returns a list of Restaurant objects generated from a JSONArray
+     * @param array
+     * @return ArrayList<Restaurant>
+     */
     public static ArrayList<Restaurant> restaurantsFromJSONArray(JSONArray array) {
         ArrayList<Restaurant> restuarants = new ArrayList<Restaurant>();
         for (int i = 0; i < array.length(); i++) {

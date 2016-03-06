@@ -23,7 +23,16 @@ import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
  */
 
 interface YelpServiceResponse {
+    /**
+     * If Yelp returns a successful response, passes back the Restuarant objects generated from JSON
+     * @param restaurants
+     */
     void onSuccess(ArrayList<Restaurant> restaurants);
+
+    /**
+     * If an error occurs while sending the request to Yelp, passes back the generated error message
+     * @param errorMessage
+     */
     void onError(String errorMessage);
 }
 
@@ -33,6 +42,12 @@ public abstract class YelpService {
     private static final String token = "__OE3ef3090onLLfZwvRlklH1IQXbvy_";
     private static final String tokenSecret = "cxBVm3ShLCdMTF0S6ch9fD8TgqY";
 
+    /**
+     * Sends network request to Yelp for restaurants
+     * @param context
+     * @param request
+     * @param callback
+     */
     public static void search(Context context, edu.ucsb.cs.cs190i.ihungry.ihungryapp.Request request, final YelpServiceResponse callback) {
         String url = generateURLString(request);
         RequestQueue requestQueue = Volley.newRequestQueue(context);
@@ -72,6 +87,11 @@ public abstract class YelpService {
         }
     }
 
+    /**
+     * Generate url for Yelp Api with selected search query
+     * @param request
+     * @return String
+     */
     private static String generateURLString(edu.ucsb.cs.cs190i.ihungry.ihungryapp.Request request) {
         StringBuilder builder = new StringBuilder("https://api.yelp.com/v2/search?term=restaurants&");
         builder.append(String.format("ll=%f,%f&radius_filter=%f", request.latitude, request.longitude, request.radius));
