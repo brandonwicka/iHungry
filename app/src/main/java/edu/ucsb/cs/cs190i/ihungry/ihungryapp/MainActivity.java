@@ -1,6 +1,7 @@
 package edu.ucsb.cs.cs190i.ihungry.ihungryapp;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +12,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
+import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("iHungry");
 
+        ImageButton bigButton = (ImageButton)findViewById(R.id.big_button);
         ImageButton typeButton = (ImageButton)findViewById(R.id.typeButton);
         ImageButton priceButton = (ImageButton)findViewById(R.id.priceButton);
         ImageButton ratingButton = (ImageButton)findViewById(R.id.ratingButton);
@@ -43,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
         mCheckedItems = new ArrayList<String>();
         mCheckedPriceIndex = 0;
         mCheckedStarsIndex = 0;
+
+        bigButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayOnMap();
+            }
+        });
 
         typeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +104,15 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    //currently, this opens a map to a dummy location.
+    //This should be replaced by launching the adctivity that displays information.  That activity should have this method in it attached to a button.
+    private void displayOnMap(){
+        Restaurant restaurant = new Restaurant("Storke Tower", new LatLng(34.412612, -119.848411));
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra(MapsActivity.RESTAURANT_KEY, restaurant);
+        startActivity(intent);
     }
 
     private AlertDialog.Builder createAlertDialogBuilder() {
