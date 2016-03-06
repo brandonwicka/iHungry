@@ -71,15 +71,16 @@
             android:background="@drawable/small_button"
             android:elevation="8dp"
             android:padding="25dp"
-            android:id="@+id/buttonA"
+            android:id="@+id/typeButton"
             android:src="@drawable/taco"
             android:scaleType="fitCenter"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
             android:layout_marginStart="42dp"
-            android:layout_marginTop="65dp" />
+            android:layout_marginTop="65dp"
+            android:clickable="true" />
         <ImageButton
-            android:id="@+id/buttonB"
+            android:id="@+id/priceButton"
             android:layout_width="125dp"
             android:layout_height="125dp"
             android:background="@drawable/small_button"
@@ -87,10 +88,10 @@
             android:src="@drawable/dollar2"
             android:padding="25dp"
             android:scaleType="fitCenter"
-            android:layout_alignTop="@+id/buttonA"
+            android:layout_alignTop="@+id/typeButton"
             android:layout_centerHorizontal="true" />
         <ImageButton
-            android:id="@+id/buttonC"
+            android:id="@+id/ratingButton"
             android:layout_width="125dp"
             android:layout_height="125dp"
             android:src="@drawable/rating"
@@ -99,7 +100,7 @@
             android:background="@drawable/small_button"
             android:elevation="8dp"
             android:layout_marginEnd="47dp"
-            android:layout_alignTop="@+id/buttonB"
+            android:layout_alignTop="@+id/typeButton"
             android:layout_alignParentEnd="true" />
 
         <TextView
@@ -120,9 +121,9 @@
             android:id="@+id/text_type"
             android:paddingTop="10dp"
             android:gravity="center"
-            android:layout_below="@+id/buttonA"
-            android:layout_alignStart="@+id/buttonA"
-            android:layout_alignEnd="@+id/buttonA" />
+            android:layout_below="@+id/typeButton"
+            android:layout_alignStart="@+id/typeButton"
+            android:layout_alignEnd="@+id/typeButton" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -132,9 +133,9 @@
             android:text="PRICE"
             android:id="@+id/text_price"
             android:layout_alignTop="@+id/text_type"
-            android:layout_alignEnd="@+id/buttonB"
+            android:layout_alignEnd="@+id/priceButton"
             android:layout_alignBottom="@+id/text_type"
-            android:layout_alignStart="@+id/buttonB" />
+            android:layout_alignStart="@+id/priceButton" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -143,10 +144,10 @@
             android:paddingTop="10dp"
             android:id="@+id/text_rating"
             android:gravity="center"
-            android:layout_below="@+id/buttonC"
-            android:layout_alignEnd="@+id/buttonC"
+            android:layout_below="@+id/ratingButton"
+            android:layout_alignEnd="@+id/ratingButton"
             android:layout_alignBottom="@+id/text_price"
-            android:layout_alignStart="@+id/buttonC" />
+            android:layout_alignStart="@+id/ratingButton" />
 
         <SeekBar
             android:layout_width="wrap_content"

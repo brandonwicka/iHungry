@@ -34,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("iHungry");
 
-        ImageButton a = (ImageButton)findViewById(R.id.buttonA);
-        ImageButton b = (ImageButton)findViewById(R.id.buttonB);
-        ImageButton c = (ImageButton)findViewById(R.id.buttonC);
+        ImageButton typeButton = (ImageButton)findViewById(R.id.typeButton);
+        ImageButton priceButton = (ImageButton)findViewById(R.id.priceButton);
+        ImageButton ratingButton = (ImageButton)findViewById(R.id.ratingButton);
         final TextView text_distance = (TextView) findViewById(R.id.text_distance);
         SeekBar slider = (SeekBar) findViewById(R.id.seekBar);
         slider.setProgress(25);
@@ -44,21 +44,21 @@ public class MainActivity extends AppCompatActivity {
         checkedItemIndex = 0;
         checkedItemIndex2 = 0;
 
-        a.setOnClickListener(new View.OnClickListener() {
+        typeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showTypeDialog();
             }
         });
 
-        b.setOnClickListener(new View.OnClickListener() {
+        priceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showPriceDialog();
             }
         });
 
-        c.setOnClickListener(new View.OnClickListener() {
+        ratingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showRatingDialog();
