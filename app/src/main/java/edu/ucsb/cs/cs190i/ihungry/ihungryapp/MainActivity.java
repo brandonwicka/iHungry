@@ -13,6 +13,8 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import com.google.android.gms.maps.model.LatLng;
+import com.rey.material.widget.Slider;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +42,16 @@ public class MainActivity extends AppCompatActivity {
         ImageButton priceButton = (ImageButton)findViewById(R.id.priceButton);
         ImageButton ratingButton = (ImageButton)findViewById(R.id.ratingButton);
         final TextView text_distance = (TextView) findViewById(R.id.text_distance);
-        SeekBar slider = (SeekBar) findViewById(R.id.seekBar);
-        slider.setProgress(25);
+       // SeekBar slider = (SeekBar) findViewById(R.id.seekBar);
+        com.rey.material.widget.Slider s = (com.rey.material.widget.Slider) findViewById(R.id.seekBar);
+        s.setOnPositionChangeListener(new Slider.OnPositionChangeListener() {
+            @Override
+            public void onPositionChanged(Slider view, boolean fromUser, float oldPos, float newPos, int oldValue, int newValue) {
+                text_distance.setText("DISTANCE: " + newValue + " MILES");
+
+            }
+        });
+        //slider.setProgress(25);
         mCheckedItems = new ArrayList<String>();
         mCheckedPriceIndex = 0;
         mCheckedStarsIndex = 0;
@@ -74,13 +84,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        slider.setOnDragListener(new View.OnDragListener() {
+       /* slider.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View v, DragEvent event) {
                 return false;
             }
-        });
-        slider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        });*/
+       /* slider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 text_distance.setText("DISTANCE: " + progress + " MILES");
@@ -95,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
 
             }
-        });
+        });*/
 
     }
 

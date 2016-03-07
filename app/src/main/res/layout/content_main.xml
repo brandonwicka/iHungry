@@ -149,13 +149,19 @@
             android:layout_alignBottom="@+id/text_price"
             android:layout_alignStart="@+id/ratingButton" />
 
-        <SeekBar
+        <com.rey.material.widget.Slider
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:id="@+id/seekBar"
-            android:max="50"
+            app:sl_minValue="0"
+            app:sl_maxValue="30"
+            app:sl_textSize="16sp"
+            app:sl_value="10"
+            app:sl_stepValue="1"
+            app:sl_discreteMode="true"
+            app:sl_travelAnimDuration="2"
             android:layout_below="@+id/text_type"
             android:layout_alignStart="@+id/text_type"
             android:layout_alignEnd="@+id/text_rating" />

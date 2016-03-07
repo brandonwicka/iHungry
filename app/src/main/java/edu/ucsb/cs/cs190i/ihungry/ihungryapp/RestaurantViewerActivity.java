@@ -25,7 +25,7 @@ public class RestaurantViewerActivity extends AppCompatActivity {
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         imageView.setColorFilter(Color.rgb(123, 123, 123), PorterDuff.Mode.MULTIPLY);
-        String url = "https://static.pexels.com/photos/4309/city-restaurant-table-pavement.jpg";
+        String url = "http://restaurantnews.com/wp-content/uploads/2013/03/East-Coast-Wings-Grill-Spreads-Wings-Outside-of-North-Carolina-Hub-Opens-First-of-Six-Local-Restaurants-in-San-Antonio.jpg";
         Picasso.with(getApplicationContext()).load(url).fit().centerCrop().into(imageView);
 
         viewPagerAdapter =  new ViewPagerAdapter(getSupportFragmentManager(),titles, numOfTabs);
