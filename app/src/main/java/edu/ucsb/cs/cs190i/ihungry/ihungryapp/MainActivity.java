@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         bigButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                displayOnMap();
+                displayRestaurantView();
             }
         });
 
@@ -114,6 +114,12 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(MapsActivity.RESTAURANT_KEY, restaurant);
         startActivity(intent);
     }
+
+    private void displayRestaurantView() {
+        Intent intent = new Intent(this, RestaurantViewerActivity.class);
+        startActivity(intent);
+    }
+
 
     private AlertDialog.Builder createAlertDialogBuilder() {
 

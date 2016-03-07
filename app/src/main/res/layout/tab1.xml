@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    android:paddingTop="32dp"
+    >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="DETAILS"
+        android:textColor="@color/red"
+        android:textSize="18sp"
+        android:id="@+id/details_text"
+        android:layout_alignParentLeft="true"/>
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:textSize="16sp"
+        android:text="Address"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/details_text"
+        android:layout_alignStart="@+id/details_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="1234 State Street, Santa Barbara, CA 93117"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="55dp"
+        android:layout_height="30dp"
+        android:id="@+id/imageView2"
+        android:layout_alignBottom="@+id/textView3"
+        android:background="@drawable/big_button"
+        android:src="@drawable/car"
+        android:padding="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/details_text" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_marginTop="30dp"
+        android:layout_height="35dp"
+        android:text="Hours"
+        android:textSize="16sp"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/textView3"
+        android:layout_alignStart="@+id/textView3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="MON-SAT 11am - 8pm"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/textView4"
+        android:layout_alignStart="@+id/textView4" />
+
+</RelativeLayout>
