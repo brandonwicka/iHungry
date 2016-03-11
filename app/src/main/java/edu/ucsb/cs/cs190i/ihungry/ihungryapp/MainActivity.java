@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.Menu;
 import android.view.View;
@@ -21,7 +22,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
 
-    private List<String> mCheckedItems;
+    private ArrayList<String> mCheckedItems;
     private int mCheckedPriceIndex;
     private int mCheckedStarsIndex;
     private String mCheckedPrice;
@@ -127,6 +128,25 @@ public class MainActivity extends AppCompatActivity {
 
     private void displayRestaurantView() {
         Intent intent = new Intent(this, RestaurantViewerActivity.class);
+        if (mCheckedItems != null) intent.putStringArrayListExtra("FoodTypes", mCheckedItems);
+        if (mCheckedPrice != null) {
+            if (mCheckedPrice.equals("$0-$10")) {
+                intent.putExtra("MinPrice", 0);
+                intent.putExtra("MaxPrice", 10);
+            } else if (mCheckedPrice.equals("$10-$20")) {
+                intent.putExtra("MinPrice", 10);
+                intent.putExtra("MaxPrice", 20);
+            } else if (mCheckedPrice.equals("$20-$50+")) {
+                intent.putExtra("MinPrice", 20);
+            }
+        }
+        if (mCheckedStars != null) {
+            Integer starCount = Integer.parseInt(mCheckedStars.substring(0, 1));
+            intent.putExtra("StarCount", starCount.intValue());
+        }
+        com.rey.material.widget.Slider s = (com.rey.material.widget.Slider) findViewById(R.id.seekBar);
+        int radius = s.getValue();
+        intent.putExtra("Radius", radius);
         startActivity(intent);
     }
 

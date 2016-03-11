@@ -1,5 +1,7 @@
 package edu.ucsb.cs.cs190i.ihungry.ihungryapp;
 
+import java.util.ArrayList;
+
 /**
  * Created by spencerprescott on 3/6/16.
  */
@@ -47,19 +49,28 @@ public class RequestBuilder {
      * @return RequestBuilder
      */
     public RequestBuilder radius(double radius) {
-        this.radius = radius;
+        this.radius = milesToMeters(radius);
         return this;
     }
 
     /**
-     * Sets the Request's filter term, needs to be comma separated, i.e. mexican,tacos,cheap
+     * Sets the Request's filter term
      * @param filter
      * @return RequestBuilder
      */
-    public RequestBuilder filter(String filter) {
+    public RequestBuilder filter(ArrayList<String> filter) {
         StringBuilder builder = new StringBuilder(",");
-        builder.append(filter.toLowerCase());
+        for (String f:
+             filter) {
+            builder.append(f.toLowerCase());
+            builder.append(",");
+        }
+        builder.deleteCharAt(builder.toString().length()-1);
         this.filter = builder.toString();
         return this;
+    }
+
+    private double milesToMeters(double miles) {
+        return miles/0.00062137;
     }
 }
