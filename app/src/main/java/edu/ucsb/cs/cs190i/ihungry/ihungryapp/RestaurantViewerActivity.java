@@ -25,6 +25,7 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
     SlidingTabLayout tabs;
+    ArrayList<Restaurant> mRestaurants;
     CharSequence titles[]={"INFO", "REVIEWS"};
     int numOfTabs = 2;
     static final int PERMISSIONS_FINE_LOCATION_REQUEST = 1234;
@@ -95,7 +96,9 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
 
     @Override
     public void onSuccess(ArrayList<Restaurant> restaurants) {
-        Log.v("YelpApiResponse", restaurants.toString());
+        mRestaurants = restaurants;
+        // Populate tab view here
+        // Also filter based on star count here
     }
 
     @Override
