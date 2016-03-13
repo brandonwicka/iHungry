@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -15,10 +16,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.location.Location;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class RestaurantViewerActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, YelpServiceResponse {
 
@@ -36,6 +42,7 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
     ArrayList<String> mFoodTypes;
     int mMinPrice;
     int mMaxPrice;
+    Restaurant mCurrentRestaurant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,11 +106,52 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
         mRestaurants = restaurants;
         // Populate tab view here
         // Also filter based on star count here
+        mCurrentRestaurant = getRandomRestaurant(0);
+        updateUI();
     }
 
     @Override
     public void onError(String errorMessage) {
         Log.v("YelpApiError", errorMessage);
+    }
+
+    private Restaurant getRandomRestaurant(int attempts) {
+        if (attempts == mRestaurants.size()) {
+            return mRestaurants.get(0);
+        }
+        Restaurant r = mRestaurants.get((int) (Math.random() * ((mRestaurants.size() - 1) + 1)));
+        if (mStarCount < 0) {
+            return r;
+        }
+        if ((int)r.getRating() != mStarCount) {
+            return getRandomRestaurant(++attempts);
+        } else {
+            return r;
+        }
+    }
+
+    private void updateUI() {
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        Picasso.with(getApplicationContext()).load(mCurrentRestaurant.getFoodImageUrl()).fit().centerCrop().into(imageView);
+        TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText(mCurrentRestaurant.getName());
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.starsView);
+        int stars = (int) mCurrentRestaurant.getRating();
+        int margin = 0;
+        while (stars > 0) {
+            ImageView starView = new ImageView(this);
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(70, 70);
+            layoutParams.setMargins(margin, 0, 0, 0);
+            layoutParams.alignWithParent = true;
+            starView.setImageResource(R.drawable.starfull);
+            starView.setLayoutParams(layoutParams);
+            layout.addView(starView);
+            stars -= 1;
+            margin += 95;
+        }
+        viewPagerAdapter.setRestaurant(mCurrentRestaurant);
+        viewPagerAdapter.notifyDataSetChanged();
+        viewPager.invalidate();
     }
 
     private void initializeGoogleApiClient() {

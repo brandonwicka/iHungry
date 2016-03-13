@@ -24,6 +24,7 @@ public class Restaurant implements Serializable {
     private String mFoodImageUrl;
     private ArrayList<String> mCategories;
     private String mUrl;
+    private String mAddress;
 
     public Restaurant(String name, LatLng latLng){
         mName = name;
@@ -40,6 +41,8 @@ public class Restaurant implements Serializable {
         mObjectId = json.optString("id");
         JSONObject location = json.optJSONObject("location");
         if (location != null) {
+            JSONArray array = location.optJSONArray("address");
+            mAddress = array.optString(0);
             JSONObject coords = location.optJSONObject("coordinate");
             if (coords != null) {
                 mLatitude = coords.optDouble("latitude");
@@ -117,8 +120,12 @@ public class Restaurant implements Serializable {
         return mUrl;
     }
 
+    public String getAddress() {
+        return mAddress;
+    }
+
     @Override
     public String toString() {
-        return String.format("ID: %s\nName: %s\nLat: %f\nLon: %f\nRating: %f\nImage Url: %s\nCategories: %s\nPhone: %s and %s\nUrl: %s\n", mObjectId, mName, mLatitude, mLongitude, mRating, mFoodImageUrl, mCategories.toString(), mCallablePhoneNumber, mDisplayPhoneNumber, mUrl);
+        return String.format("ID: %s\nName: %s\nLat: %f\nLon: %f\nRating: %f\nImage Url: %s\nCategories: %s\nPhone: %s and %s\nUrl: %s\nAddress: %s\n", mObjectId, mName, mLatitude, mLongitude, mRating, mFoodImageUrl, mCategories.toString(), mCallablePhoneNumber, mDisplayPhoneNumber, mUrl, mAddress);
     }
 }
