@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:paddingBottom="45dp"
+            android:paddingBottom="266dp"
             android:indeterminate="true" />
     </RelativeLayout>
 
