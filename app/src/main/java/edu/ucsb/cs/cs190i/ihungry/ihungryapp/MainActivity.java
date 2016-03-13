@@ -1,23 +1,24 @@
 package edu.ucsb.cs.cs190i.ihungry.ihungryapp;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.DragEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import com.google.android.gms.maps.model.LatLng;
 import com.rey.material.widget.Slider;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private String mCheckedPrice;
     private String mCheckedStars;
     final String[] list = new String[]{"American", "Chinese", "Mexican", "Italian", "Indian", "Japanese", "Korean"};
+    static final int PERMISSIONS_FINE_LOCATION_REQUEST = 1234;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton priceButton = (ImageButton)findViewById(R.id.priceButton);
         ImageButton ratingButton = (ImageButton)findViewById(R.id.ratingButton);
         final TextView text_distance = (TextView) findViewById(R.id.text_distance);
-       // SeekBar slider = (SeekBar) findViewById(R.id.seekBar);
+
         com.rey.material.widget.Slider s = (com.rey.material.widget.Slider) findViewById(R.id.seekBar);
         s.setOnPositionChangeListener(new Slider.OnPositionChangeListener() {
             @Override
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         bigButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                displayRestaurantView();
+                doBigButton();
             }
         });
 
@@ -85,29 +88,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-       /* slider.setOnDragListener(new View.OnDragListener() {
-            @Override
-            public boolean onDrag(View v, DragEvent event) {
-                return false;
-            }
-        });*/
-       /* slider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                text_distance.setText("DISTANCE: " + progress + " MILES");
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });*/
-
     }
 
     @Override
@@ -124,6 +104,39 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MapsActivity.class);
         intent.putExtra(MapsActivity.RESTAURANT_KEY, restaurant);
         startActivity(intent);
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private void doBigButton(){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_FINE_LOCATION_REQUEST);
+        }
+        else{
+            displayRestaurantView();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_FINE_LOCATION_REQUEST: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //permission granted
+                } else {
+                    // permission denied
+                    createAlertDialogBuilder()
+                            .setTitle("Location Access Required")
+                            .setMessage("\tiHungry requires you to enable access to this device's location in order to find restaurants near you." +
+                                    "  Either enable location access for iHungry in your device's settings or choose \"ALLOW\" when prompted for permissions.")
+                            .setNegativeButton("Close",null)
+                    .show();
+                }
+                return;
+            }
+
+        }
     }
 
     private void displayRestaurantView() {
