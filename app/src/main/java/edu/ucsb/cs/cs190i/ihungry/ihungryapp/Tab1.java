@@ -128,8 +128,9 @@ public class Tab1 extends Fragment {
             }
 
             ImageButton pic1 = (ImageButton) v.findViewById(R.id.pic1);
-
-            Picasso.with(getActivity().getApplicationContext()).load(mRestaurant.getFoodImageUrl()).transform(new CircleTransform()).into(pic1);
+            String url1 = mRestaurant.getFoodImageUrl();
+            String originalImage = url1.substring(0, url1.lastIndexOf("/")) + "/o.jpg";
+            Picasso.with(getActivity().getApplicationContext()).load(originalImage).transform(new CircleTransform()).into(pic1);
 
 
             pic1.setOnClickListener(new View.OnClickListener() {
@@ -146,7 +147,8 @@ public class Tab1 extends Fragment {
                     View dialogLayout = inflater.inflate(R.layout.image_dialog, null);
                     ImageView imageView = (ImageView) dialogLayout.findViewById(R.id.DialogImage);
                     String url1 = mRestaurant.getFoodImageUrl();
-                    Picasso.with(getActivity().getApplicationContext()).load(url1).resize(500, 500).into(imageView);
+                    String originalImage = url1.substring(0, url1.lastIndexOf("/")) + "/o.jpg";
+                    Picasso.with(getActivity().getApplicationContext()).load(originalImage).resize(500, 500).into(imageView);
                     dialog.setView(dialogLayout);
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 

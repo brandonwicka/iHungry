@@ -19,6 +19,7 @@ import android.location.Location;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.squareup.picasso.Picasso;
@@ -55,9 +56,7 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
         }
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
-        imageView.setColorFilter(Color.rgb(123, 123, 123), PorterDuff.Mode.MULTIPLY);
-        String url = "http://restaurantnews.com/wp-content/uploads/2013/03/East-Coast-Wings-Grill-Spreads-Wings-Outside-of-North-Carolina-Hub-Opens-First-of-Six-Local-Restaurants-in-San-Antonio.jpg";
-        Picasso.with(getApplicationContext()).load(url).fit().centerCrop().into(imageView);
+        imageView.setColorFilter(Color.rgb(100, 100, 100), PorterDuff.Mode.MULTIPLY);
 
         viewPagerAdapter =  new ViewPagerAdapter(getSupportFragmentManager(),titles, numOfTabs);
         viewPager = (ViewPager) findViewById(R.id.pager);
@@ -147,7 +146,9 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
 
     private void updateUI() {
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
-        Picasso.with(getApplicationContext()).load(mCurrentRestaurant.getFoodImageUrl()).fit().centerCrop().into(imageView);
+        String foodImageUrl = mCurrentRestaurant.getFoodImageUrl();
+        String originalImage = foodImageUrl.substring(0, foodImageUrl.lastIndexOf("/")) + "/o.jpg";
+        Picasso.with(getApplicationContext()).load(originalImage).fit().centerCrop().into(imageView);
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(mCurrentRestaurant.getName());
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.starsView);
