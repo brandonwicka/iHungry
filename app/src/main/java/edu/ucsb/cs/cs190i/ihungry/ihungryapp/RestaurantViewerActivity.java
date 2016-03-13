@@ -43,11 +43,16 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
     int mMinPrice;
     int mMaxPrice;
     Restaurant mCurrentRestaurant;
+    private final String RESTAURANT_KEY = "restaurant_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_viewer);
+
+        if(savedInstanceState != null) {
+            mCurrentRestaurant = (Restaurant) savedInstanceState.getSerializable(RESTAURANT_KEY);
+        }
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         imageView.setColorFilter(Color.rgb(123, 123, 123), PorterDuff.Mode.MULTIPLY);
@@ -69,6 +74,12 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
 
         tabs.setViewPager(viewPager);
         getRestaurants();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState ){
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(RESTAURANT_KEY, mCurrentRestaurant);
     }
 
     private void getRestaurants() {
@@ -106,7 +117,9 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
         mRestaurants = restaurants;
         // Populate tab view here
         // Also filter based on star count here
-        mCurrentRestaurant = getRandomRestaurant(0);
+        if(mCurrentRestaurant == null){
+            mCurrentRestaurant = getRandomRestaurant(0);
+        }
         updateUI();
     }
 

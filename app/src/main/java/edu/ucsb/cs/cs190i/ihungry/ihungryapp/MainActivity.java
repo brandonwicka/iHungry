@@ -30,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
     private String mCheckedStars;
     final String[] list = new String[]{"American", "Chinese", "Mexican", "Italian", "Indian", "Japanese", "Korean"};
     static final int PERMISSIONS_FINE_LOCATION_REQUEST = 1234;
+    private final String CHECKED_PRICE_INDEX_KEY = "checked_price_index_key";
+    private final String CHECKED_STARS_INDEX_KEY = "checked_stars_index_key";
+    private final String CHECKED_ITEMS_LIST_KEY = "checked_items_list_key";
+
 
 
     @Override
@@ -56,9 +60,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //slider.setProgress(25);
-        mCheckedItems = new ArrayList<String>();
-        mCheckedPriceIndex = 0;
-        mCheckedStarsIndex = 0;
+        if(savedInstanceState != null) {
+            mCheckedItems = savedInstanceState.getStringArrayList(CHECKED_ITEMS_LIST_KEY);
+            mCheckedPriceIndex = savedInstanceState.getInt(CHECKED_PRICE_INDEX_KEY);
+            mCheckedStarsIndex = savedInstanceState.getInt(CHECKED_STARS_INDEX_KEY);
+        }
+        else {
+            mCheckedItems = new ArrayList<String>();
+            mCheckedPriceIndex = 0;
+            mCheckedStarsIndex = 0;
+        }
+
 
         bigButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +100,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState ){
+        super.onSaveInstanceState(outState);
+        outState.putStringArrayList(CHECKED_ITEMS_LIST_KEY, mCheckedItems);
+        outState.putInt(CHECKED_PRICE_INDEX_KEY, mCheckedPriceIndex);
+        outState.putInt(CHECKED_STARS_INDEX_KEY, mCheckedStarsIndex);
     }
 
     @Override
