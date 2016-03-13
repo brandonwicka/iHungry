@@ -1,9 +1,15 @@
 package edu.ucsb.cs.cs190i.ihungry.ihungryapp;
 
+import android.Manifest;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.content.DialogInterface;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -13,7 +19,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.content.Intent;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -123,11 +131,87 @@ public class Tab1 extends Fragment {
             TextView websiteTextView = (TextView) v.findViewById(R.id.website_link);
             websiteTextView.setText(mRestaurant.getUrl().split(Pattern.quote("?"))[0]);
 
+            ImageButton websiteButton = (ImageButton) v.findViewById(R.id.website_button);
+            websiteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mRestaurant.getUrl()));
+                    startActivity(browserIntent);
+                }
+            });
+
+            final ImageButton mapButton = (ImageButton) v.findViewById(R.id.imageView2);
+            mapButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent mapIntent = new Intent(getContext(), MapsActivity.class);
+                    mapIntent.putExtra("restaurant_key", mRestaurant);
+                    startActivity(mapIntent);
+                }
+            });
+
+            ImageButton phoneButton = (ImageButton) v.findViewById(R.id.phone_button);
+            phoneButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.CALL_PHONE},
+                                23);
+                    } else {
+                        PackageManager pm = getContext().getPackageManager();
+                        if (pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
+                            try {
+                                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                                callIntent.setData(Uri.parse("tel:" + mRestaurant.getCallablePhoneNumber()));
+                                startActivity(callIntent);
+                            } catch (ActivityNotFoundException e) {
+                                Toast.makeText(getContext(), "Calling not enabled on this device", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getContext(), "Calling not enabled on this device", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                }
+            });
+
         }
 
 
         return v;
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 23: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
+                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        //get Android Studio compiler to shut up
+                    }
+                    // Success
+                    PackageManager pm = getContext().getPackageManager();
+                    if (pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
+                        try {
+                            Intent callIntent = new Intent(Intent.ACTION_CALL);
+                            callIntent.setData(Uri.parse("tel:" + mRestaurant.getCallablePhoneNumber()));
+                            startActivity(callIntent);
+                        } catch (ActivityNotFoundException e) {
+                            Toast.makeText(getContext(), "Calling not enabled on this device", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getContext(), "Calling not enabled on this device", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+
+                    // permission denied
+                }
+                return;
+            }
+
+        }
+    }
 }

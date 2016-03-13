@@ -119,8 +119,10 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
         if (attempts == mRestaurants.size()) {
             return mRestaurants.get(0);
         }
-        Restaurant r = mRestaurants.get((int) (Math.random() * ((mRestaurants.size() - 1) + 1)));
-        if (mStarCount < 0) {
+
+        int random = (int) (Math.random() * ((mRestaurants.size() - 1) + 1));
+        Restaurant r = mRestaurants.get(random);
+        if (mStarCount <= 0) {
             return r;
         }
         if ((int)r.getRating() != mStarCount) {
