@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ActionBar;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.content.DialogInterface;
@@ -73,9 +74,17 @@ public class Tab1 extends Fragment {
             mapButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    /*
                     Intent mapIntent = new Intent(getContext(), MapsActivity.class);
-                    mapIntent.putExtra("restaurant_key", mRestaurant);
+                    mapIntent.putExtra(MapsActivity.RESTAURANT_KEY, mRestaurant);
                     getActivity().startActivity(mapIntent);
+                    */
+                    String uri ="http://maps.google.com/maps?f=d&daddr=" + mRestaurant.getLatitude() + "," + mRestaurant.getLongitude();
+                    Intent intent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse(uri));
+                    intent.setComponent(new ComponentName("com.google.android.apps.maps",
+                            "com.google.android.maps.MapsActivity"));
+                    startActivity(intent);
                 }
             });
 

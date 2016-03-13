@@ -16,7 +16,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    static final String RESTAURANT_KEY = "restaurant_key";
+    public static final String RESTAURANT_KEY = "restaurant_key";
     private GoogleMap mMap;
     private Restaurant mRestaurant;
 
