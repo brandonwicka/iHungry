@@ -1,6 +1,7 @@
 package edu.ucsb.cs.cs190i.ihungry.ihungryapp;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.pm.PackageManager;
@@ -17,11 +18,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.content.Intent;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.FrameLayout;
 
 import com.squareup.picasso.Picasso;
 
@@ -40,85 +46,8 @@ public class Tab1 extends Fragment {
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRestaurant = (Restaurant) getArguments().getSerializable("Restaurant");
         View v =inflater.inflate(R.layout.tab1,container,false);
-        ImageButton pic1 = (ImageButton) v.findViewById(R.id.pic1);
-        ImageButton pic2 = (ImageButton) v.findViewById(R.id.pic2);
-        ImageButton pic3 = (ImageButton) v.findViewById(R.id.pic3);
-        String url1 = "http://s3-media3.fl.yelpcdn.com/bphoto/_CTFS9nG896h40jQ0zx2ew/o.jpg";
-        String url2 = "http://s3-media2.fl.yelpcdn.com/bphoto/i_DclbF1xDqxRAFp86iEyw/o.jpg";
-        String url3 = "http://s3-media2.fl.yelpcdn.com/bphoto/xE7f2Z-meKPruhA2ORN9Qw/o.jpg";
-
-        Picasso.with(getActivity().getApplicationContext()).load(url1).transform(new CircleTransform()).into(pic1);
-        Picasso.with(getActivity().getApplicationContext()).load(url2).transform(new CircleTransform()).into(pic2);
-        Picasso.with(getActivity().getApplicationContext()).load(url3).transform(new CircleTransform()).into(pic3);
 
 
-        pic1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppTheme_FlavoredMaterialLight3);
-                builder.setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                LayoutInflater inflater = getActivity().getLayoutInflater();
-                View dialogLayout = inflater.inflate(R.layout.image_dialog, null);
-                ImageView imageView = (ImageView) dialogLayout.findViewById(R.id.DialogImage);
-                String url1 = "http://s3-media3.fl.yelpcdn.com/bphoto/_CTFS9nG896h40jQ0zx2ew/o.jpg";
-                Picasso.with(getActivity().getApplicationContext()).load(url1).resize(500, 500).into(imageView);
-                dialog.setView(dialogLayout);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-                dialog.show();
-            }
-        });
-
-
-        pic2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppTheme_FlavoredMaterialLight3);
-                builder.setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                LayoutInflater inflater = getActivity().getLayoutInflater();
-                View dialogLayout = inflater.inflate(R.layout.image_dialog, null);
-                ImageView imageView = (ImageView) dialogLayout.findViewById(R.id.DialogImage);
-                String url2 = "http://s3-media2.fl.yelpcdn.com/bphoto/i_DclbF1xDqxRAFp86iEyw/o.jpg";
-                Picasso.with(getActivity().getApplicationContext()).load(url2).resize(500, 500).into(imageView);
-                dialog.setView(dialogLayout);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.show();
-            }
-        });
-
-
-        pic3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppTheme_FlavoredMaterialLight3);
-                builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                String url3 = "http://s3-media2.fl.yelpcdn.com/bphoto/xE7f2Z-meKPruhA2ORN9Qw/o.jpg";
-
-                AlertDialog dialog = builder.create();
-                LayoutInflater inflater = getActivity().getLayoutInflater();
-                View dialogLayout = inflater.inflate(R.layout.image_dialog, null);
-                ImageView imageView = (ImageView) dialogLayout.findViewById(R.id.DialogImage);
-                Picasso.with(getActivity().getApplicationContext()).load(url3).resize(500, 500).into(imageView);
-                dialog.setView(dialogLayout);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-                dialog.show();
-            }
-        });
 
         if (mRestaurant != null) {
             Log.v("Restaurant", mRestaurant.toString());
@@ -146,7 +75,7 @@ public class Tab1 extends Fragment {
                 public void onClick(View v) {
                     Intent mapIntent = new Intent(getContext(), MapsActivity.class);
                     mapIntent.putExtra("restaurant_key", mRestaurant);
-                    startActivity(mapIntent);
+                    getActivity().startActivity(mapIntent);
                 }
             });
 
@@ -175,6 +104,46 @@ public class Tab1 extends Fragment {
                 }
             });
 
+            GridLayout categoryGrid = (GridLayout) v.findViewById(R.id.category_grid);
+            for (String category : mRestaurant.getCategories()) {
+                TextView textView = new TextView(getContext());
+                FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout
+                        .LayoutParams.WRAP_CONTENT);
+                textView.setPadding(15, 15, 15, 20);
+                textView.setTextSize(15);
+                textView.setLayoutParams(layoutParams);
+                textView.setBackground(getResources().getDrawable(R.drawable.pill));
+                textView.setText(category);
+                textView.setTextColor(getResources().getColor(R.color.white));
+                categoryGrid.addView(textView);
+            }
+
+            ImageButton pic1 = (ImageButton) v.findViewById(R.id.pic1);
+
+            Picasso.with(getActivity().getApplicationContext()).load(mRestaurant.getFoodImageUrl()).transform(new CircleTransform()).into(pic1);
+
+
+            pic1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppTheme_FlavoredMaterialLight3);
+                    builder.setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    LayoutInflater inflater = getActivity().getLayoutInflater();
+                    View dialogLayout = inflater.inflate(R.layout.image_dialog, null);
+                    ImageView imageView = (ImageView) dialogLayout.findViewById(R.id.DialogImage);
+                    String url1 = mRestaurant.getFoodImageUrl();
+                    Picasso.with(getActivity().getApplicationContext()).load(url1).resize(500, 500).into(imageView);
+                    dialog.setView(dialogLayout);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+                    dialog.show();
+                }
+            });
         }
 
 
