@@ -4,6 +4,9 @@ import android.Manifest;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.location.LocationServices;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -17,7 +20,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.location.Location;
 import android.widget.LinearLayout;
@@ -54,8 +61,6 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_viewer);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_trans);
-        //setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.rsz_1backarrow);
@@ -77,6 +82,29 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
             @Override
             public int getIndicatorColor(int position) {
                 return getResources().getColor(R.color.colorAccent);
+            }
+        });
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v1) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(RestaurantViewerActivity.this, R.style.AppTheme_FlavoredMaterialLight3);
+                builder.setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                LayoutInflater inflater = getLayoutInflater();
+                View dialogLayout = inflater.inflate(R.layout.image_dialog, null);
+                ImageView imageView = (ImageView) dialogLayout.findViewById(R.id.DialogImage);
+                String url1 = mCurrentRestaurant.getFoodImageUrl();
+                String originalImage = url1.substring(0, url1.lastIndexOf("/")) + "/o.jpg";
+                Picasso.with(getApplicationContext()).load(originalImage).fit().centerInside().into(imageView);
+                dialog.setView(dialogLayout);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+                dialog.show();
             }
         });
 
@@ -169,6 +197,9 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
         String foodImageUrl = mCurrentRestaurant.getFoodImageUrl();
         String originalImage = foodImageUrl.substring(0, foodImageUrl.lastIndexOf("/")) + "/o.jpg";
         Picasso.with(getApplicationContext()).load(originalImage).fit().centerCrop().into(imageView);
+
+
+
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(mCurrentRestaurant.getName());
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.starsView);

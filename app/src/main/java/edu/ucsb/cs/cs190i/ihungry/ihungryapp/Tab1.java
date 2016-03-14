@@ -113,48 +113,20 @@ public class Tab1 extends Fragment {
                 }
             });
 
-            GridLayout categoryGrid = (GridLayout) v.findViewById(R.id.category_grid);
+            RelativeLayout categoryLayout = (RelativeLayout) v.findViewById(R.id.categories_panel);
             for (String category : mRestaurant.getCategories()) {
                 TextView textView = new TextView(getContext());
                 FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout
-                        .LayoutParams.WRAP_CONTENT);
+                       .LayoutParams.WRAP_CONTENT);
                 textView.setPadding(15, 15, 15, 20);
                 textView.setTextSize(15);
                 textView.setLayoutParams(layoutParams);
                 textView.setBackground(getResources().getDrawable(R.drawable.pill));
                 textView.setText(category);
                 textView.setTextColor(getResources().getColor(R.color.white));
-                categoryGrid.addView(textView);
+                categoryLayout.addView(textView);
             }
 
-            ImageButton pic1 = (ImageButton) v.findViewById(R.id.pic1);
-            String url1 = mRestaurant.getFoodImageUrl();
-            String originalImage = url1.substring(0, url1.lastIndexOf("/")) + "/o.jpg";
-            Picasso.with(getActivity().getApplicationContext()).load(originalImage).transform(new CircleTransform()).into(pic1);
-
-
-            pic1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppTheme_FlavoredMaterialLight3);
-                    builder.setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    LayoutInflater inflater = getActivity().getLayoutInflater();
-                    View dialogLayout = inflater.inflate(R.layout.image_dialog, null);
-                    ImageView imageView = (ImageView) dialogLayout.findViewById(R.id.DialogImage);
-                    String url1 = mRestaurant.getFoodImageUrl();
-                    String originalImage = url1.substring(0, url1.lastIndexOf("/")) + "/o.jpg";
-                    Picasso.with(getActivity().getApplicationContext()).load(originalImage).resize(500, 500).into(imageView);
-                    dialog.setView(dialogLayout);
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-                    dialog.show();
-                }
-            });
         }
 
 
