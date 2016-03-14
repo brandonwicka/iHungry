@@ -113,7 +113,8 @@ public class Tab1 extends Fragment {
                 }
             });
 
-            RelativeLayout categoryLayout = (RelativeLayout) v.findViewById(R.id.categories_panel);
+            LinearLayout categoryLayout = (LinearLayout) v.findViewById(R.id.categories_panel);
+            categoryLayout.setOrientation(LinearLayout.HORIZONTAL);
             for (String category : mRestaurant.getCategories()) {
                 TextView textView = new TextView(getContext());
                 FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout
