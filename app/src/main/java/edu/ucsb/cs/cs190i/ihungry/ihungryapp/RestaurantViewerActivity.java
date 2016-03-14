@@ -46,6 +46,7 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
     ViewPagerAdapter viewPagerAdapter;
     SlidingTabLayout tabs;
     ArrayList<Restaurant> mRestaurants;
+    TextView distance_away;
     CharSequence titles[]={"INFO", "REVIEWS & DEALS"};
     int numOfTabs = 2;
     static final int PERMISSIONS_FINE_LOCATION_REQUEST = 1234;
@@ -211,7 +212,13 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
         String originalImage = foodImageUrl.substring(0, foodImageUrl.lastIndexOf("/")) + "/o.jpg";
         Picasso.with(getApplicationContext()).load(originalImage).fit().centerCrop().into(imageView);
 
-
+        Location rest_loc = new Location("");
+        rest_loc.setLatitude(mCurrentRestaurant.getLatitude());
+        rest_loc.setLongitude(mCurrentRestaurant.getLongitude());
+        float distanceInMeters = mLastLocation.distanceTo(rest_loc);
+        float distanceInMiles = (distanceInMeters / 1609);
+        distance_away = (TextView) findViewById(R.id.text_distance_away);
+        distance_away.setText("" + String.format("%.1f", distanceInMiles) + " MILES AWAY");
 
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(mCurrentRestaurant.getName());

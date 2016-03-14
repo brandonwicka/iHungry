@@ -33,14 +33,30 @@
             android:fontFamily="sans-serif-thin"
             android:textColor="@color/white" />
 
+
+
         <RelativeLayout
             android:id="@+id/starsView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:layout_below="@+id/textView"
             android:layout_marginLeft="10dp"
             >
             <!-- Stars are added programmatically here -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2.9 MILES AWAY"
+                android:textColor="@color/white"
+                android:layout_marginRight="15dp"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:id="@+id/text_distance_away"
+                android:fontFamily="sans-serif-thin"
+
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true" />
         </RelativeLayout>
 
 
@@ -69,28 +85,7 @@
             >
 
         </android.support.v4.view.ViewPager>
-        <!--
-       <Button
-           android:layout_width="wrap_content"
-           android:layout_height="100dp"
-           android:text="INFO"
-           android:background="@drawable/underline_buttons"
-           android:textSize="20sp"
-           android:id="@+id/button"
-           android:layout_marginRight="-8dp"
-           android:layout_weight="1"
-           android:layout_alignParentStart="true" />
 
-       <Button
-           android:layout_width="wrap_content"
-           android:layout_height="100dp"
-           android:layout_weight="1"
-           android:textSize="20sp"
-           android:background="@drawable/underline_buttons"
-           android:text="REVIEWS"
-           android:id="@+id/button2"
-           android:layout_alignParentEnd="true" />
-           -->
 
     </RelativeLayout>
 </RelativeLayout>
