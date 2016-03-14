@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="65dp"
     tools:context="edu.ucsb.cs.cs190i.ihungry.ihungryapp.MainActivity"
     tools:showIn="@layout/activity_main">
@@ -18,9 +15,10 @@
         android:id="@+id/card_view"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="475dp"
         android:elevation="2dp"
-        card_view:cardCornerRadius="4dp">
+        card_view:cardCornerRadius="4dp"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -61,6 +59,8 @@
     <RelativeLayout
         android:id="@+id/bottom_layout"
         android:paddingTop="0dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
         android:layout_below="@id/card_view"
         android:layout_width="match_parent"
         android:animateLayoutChanges="true"
@@ -78,7 +78,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
             android:layout_marginStart="42dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="60dp"
             android:clickable="true" />
         <ImageButton
             android:id="@+id/distButton"
@@ -164,6 +164,7 @@
             app:sl_transformAnimDuration="10"
             app:sl_thumbFocusRadius="14dp"
             app:sl_thumbRadius="14dp"
+            app:sl_primaryColor="@color/blue"
             app:sl_textSize="18sp"
             app:sl_value="10"
             app:sl_stepValue="1"
@@ -180,7 +181,7 @@
             android:text="10 MILES"
             android:textSize="17sp"
             android:gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="2dp"
             android:id="@+id/text_distance"
             android:layout_below="@+id/seekBar"
             android:layout_alignEnd="@+id/text_options"

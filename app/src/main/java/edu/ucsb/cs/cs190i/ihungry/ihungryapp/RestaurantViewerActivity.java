@@ -46,7 +46,7 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
     ViewPagerAdapter viewPagerAdapter;
     SlidingTabLayout tabs;
     ArrayList<Restaurant> mRestaurants;
-    CharSequence titles[]={"INFO", "REVIEWS"};
+    CharSequence titles[]={"INFO", "REVIEWS & DEALS"};
     int numOfTabs = 2;
     static final int PERMISSIONS_FINE_LOCATION_REQUEST = 1234;
     GoogleApiClient mGoogleApiClient;
@@ -99,10 +99,10 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
                 AlertDialog dialog = builder.create();
                 LayoutInflater inflater = getLayoutInflater();
                 View dialogLayout = inflater.inflate(R.layout.image_dialog, null);
-                ImageView imageView = (ImageView) dialogLayout.findViewById(R.id.DialogImage);
+                ImageView touchView = (ImageView) dialogLayout.findViewById(R.id.DialogImage);
                 String url1 = mCurrentRestaurant.getFoodImageUrl();
                 String originalImage = url1.substring(0, url1.lastIndexOf("/")) + "/o.jpg";
-                Picasso.with(getApplicationContext()).load(originalImage).fit().centerInside().into(imageView);
+                Picasso.with(getApplicationContext()).load(originalImage).fit().centerInside().into(touchView);
                 dialog.setView(dialogLayout);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 

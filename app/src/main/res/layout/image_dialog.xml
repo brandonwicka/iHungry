@@ -8,11 +8,11 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:paddingRight="16dp"
+        android:scaleType="fitCenter"
         android:paddingLeft="16dp"
         android:id="@+id/DialogImage"
         android:layout_width="500dp"
         android:layout_height="500dp"
-        android:scaleType="fitCenter"
         />
 
 </LinearLayout>
