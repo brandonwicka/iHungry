@@ -65,13 +65,13 @@
     </style>
 
     <style name="AppTheme.FlavoredMaterialLight3" parent="Theme.AlertDialogPro.Material.Light">
-        <item name="colorPrimary">#000000</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <item name="colorAccent">@color/white</item>
         <item name="android:windowTitleStyle">@style/AdpTitleStyle</item>
         <item name="adpButtonBarNegativeButtonStyle">@style/AdpNormalButtonStyle</item>
         <item name="adpButtonBarNeutralButtonStyle">@style/AdpNormalButtonStyle</item>
-        <item name="android:background">@color/grey</item>
+        <item name="android:background">#80000000</item>
     </style>
 
     <style name="AdpTitleStyle" parent="DialogWindowTitle.AlertDialogPro.Material.Light">

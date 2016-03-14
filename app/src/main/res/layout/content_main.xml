@@ -63,6 +63,7 @@
         android:paddingTop="0dp"
         android:layout_below="@id/card_view"
         android:layout_width="match_parent"
+        android:animateLayoutChanges="true"
         android:layout_height="match_parent">
 
         <ImageButton
@@ -77,16 +78,16 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
             android:layout_marginStart="42dp"
-            android:layout_marginTop="65dp"
+            android:layout_marginTop="80dp"
             android:clickable="true" />
         <ImageButton
-            android:id="@+id/priceButton"
+            android:id="@+id/distButton"
             android:layout_width="125dp"
             android:layout_height="125dp"
-            android:background="@drawable/small_button"
+            android:background="@drawable/distance_button"
             android:elevation="8dp"
-            android:src="@drawable/dollar2"
-            android:padding="25dp"
+            android:src="@drawable/car"
+            android:padding="20dp"
             android:scaleType="fitCenter"
             android:layout_alignTop="@+id/typeButton"
             android:layout_centerHorizontal="true" />
@@ -97,7 +98,7 @@
             android:src="@drawable/rating"
             android:scaleType="fitCenter"
             android:padding="25dp"
-            android:background="@drawable/small_button"
+            android:background="@drawable/rating_button"
             android:elevation="8dp"
             android:layout_marginEnd="47dp"
             android:layout_alignTop="@+id/typeButton"
@@ -130,12 +131,12 @@
             android:layout_height="30dp"
             android:paddingTop="10dp"
             android:gravity="center"
-            android:text="PRICE"
-            android:id="@+id/text_price"
+            android:text="DISTANCE"
+            android:id="@+id/text_button_dist"
             android:layout_alignTop="@+id/text_type"
-            android:layout_alignEnd="@+id/priceButton"
+            android:layout_alignEnd="@+id/distButton"
             android:layout_alignBottom="@+id/text_type"
-            android:layout_alignStart="@+id/priceButton" />
+            android:layout_alignStart="@+id/distButton" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -146,7 +147,7 @@
             android:gravity="center"
             android:layout_below="@+id/ratingButton"
             android:layout_alignEnd="@+id/ratingButton"
-            android:layout_alignBottom="@+id/text_price"
+            android:layout_alignBottom="@+id/text_button_dist"
             android:layout_alignStart="@+id/ratingButton" />
 
         <com.rey.material.widget.Slider
@@ -155,7 +156,7 @@
             android:layout_centerHorizontal="true"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:id="@+id/seekBar"
             app:sl_minValue="0"
             app:sl_maxValue="30"
@@ -176,8 +177,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DISTANCE: 10 MILES"
-            android:textSize="15sp"
+            android:text="10 MILES"
+            android:textSize="17sp"
             android:gravity="center"
             android:layout_marginTop="10dp"
             android:id="@+id/text_distance"

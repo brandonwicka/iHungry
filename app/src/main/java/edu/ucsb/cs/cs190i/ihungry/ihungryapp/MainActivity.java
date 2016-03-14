@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private int mCheckedPriceIndex;
     private int mCheckedStarsIndex;
     private String mCheckedPrice;
+    private Boolean isSeekbarVis = false;
     private String mCheckedStars;
     final String[] list = new String[]{"American", "Chinese", "Mexican", "Italian", "Indian", "Japanese", "Korean"};
     static final int PERMISSIONS_FINE_LOCATION_REQUEST = 1234;
@@ -47,18 +48,21 @@ public class MainActivity extends AppCompatActivity {
 
         ImageButton bigButton = (ImageButton)findViewById(R.id.big_button);
         ImageButton typeButton = (ImageButton)findViewById(R.id.typeButton);
-        ImageButton priceButton = (ImageButton)findViewById(R.id.priceButton);
+        ImageButton distButton = (ImageButton)findViewById(R.id.distButton);
         ImageButton ratingButton = (ImageButton)findViewById(R.id.ratingButton);
         final TextView text_distance = (TextView) findViewById(R.id.text_distance);
 
-        com.rey.material.widget.Slider s = (com.rey.material.widget.Slider) findViewById(R.id.seekBar);
+        final com.rey.material.widget.Slider s = (com.rey.material.widget.Slider) findViewById(R.id.seekBar);
+
         s.setOnPositionChangeListener(new Slider.OnPositionChangeListener() {
             @Override
             public void onPositionChanged(Slider view, boolean fromUser, float oldPos, float newPos, int oldValue, int newValue) {
-                text_distance.setText("DISTANCE: " + newValue + " MILES");
+                text_distance.setText("" + newValue + " MILES");
 
             }
         });
+        text_distance.setVisibility(View.GONE);
+        s.setVisibility(View.GONE);
         //slider.setProgress(25);
         if(savedInstanceState != null) {
             mCheckedItems = savedInstanceState.getStringArrayList(CHECKED_ITEMS_LIST_KEY);
@@ -86,10 +90,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        priceButton.setOnClickListener(new View.OnClickListener() {
+        distButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPriceDialog();
+                if (isSeekbarVis == false) {
+                    s.setVisibility(View.VISIBLE);
+                    text_distance.setVisibility(View.VISIBLE);
+                    isSeekbarVis = true;
+                }
+                else {
+                    s.setVisibility(View.GONE);
+                    text_distance.setVisibility(View.GONE);
+                    isSeekbarVis = false;
+                }
             }
         });
 
@@ -241,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
-    private void showPriceDialog() {
+  /*  private void showPriceDialog() {
         final String[] list = new String[]{"$0-$10", "$10-$20", "$20-$50+"};
 
         mCheckedPrice = list[mCheckedPriceIndex];
@@ -273,7 +286,7 @@ public class MainActivity extends AppCompatActivity {
                         null
                 )
                 .show();
-    }
+    }*/
 
     private void showRatingDialog() {
         final String[] list = new String[]{"5 STARS", "4 STARS", "3 STARS", "2 STARS", "1 STAR"};
