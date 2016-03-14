@@ -7,13 +7,17 @@ import com.google.android.gms.location.LocationServices;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.location.Location;
 import android.widget.LinearLayout;
@@ -50,7 +54,12 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_viewer);
-
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_trans);
+        //setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.rsz_1backarrow);
+        getSupportActionBar().setElevation(0);
         if(savedInstanceState != null) {
             mCurrentRestaurant = (Restaurant) savedInstanceState.getSerializable(RESTAURANT_KEY);
         }
@@ -79,6 +88,17 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
     public void onSaveInstanceState(Bundle outState ){
         super.onSaveInstanceState(outState);
         outState.putSerializable(RESTAURANT_KEY, mCurrentRestaurant);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void getRestaurants() {

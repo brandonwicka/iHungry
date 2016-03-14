@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.ucsb.cs.cs190i.ihungry.ihungryapp.RestaurantViewerActivity">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        tools:context="edu.ucsb.cs.cs190i.ihungry.ihungryapp.RestaurantViewerActivity"
+        android:id="@+id/relativeLayout">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:id="@+id/imageView"
+            android:alpha="1"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_marginTop="220dp"
+            android:textSize="50sp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/textView"
+            android:fontFamily="sans-serif-thin"
+            android:textColor="@color/white" />
+
+        <RelativeLayout
+            android:id="@+id/starsView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/textView"
+            android:layout_marginLeft="10dp"
+            >
+            <!-- Stars are added programmatically here -->
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativeLayout"
+        >
+
+        <edu.ucsb.cs.cs190i.ihungry.ihungryapp.SlidingTabLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:id="@+id/tabs"
+            android:elevation="2dp"
+            android:background="@color/white"
+            >
+        </edu.ucsb.cs.cs190i.ihungry.ihungryapp.SlidingTabLayout>
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tabs"
+            android:id="@+id/pager"
+            >
+
+        </android.support.v4.view.ViewPager>
+        <!--
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="100dp"
+           android:text="INFO"
+           android:background="@drawable/underline_buttons"
+           android:textSize="20sp"
+           android:id="@+id/button"
+           android:layout_marginRight="-8dp"
+           android:layout_weight="1"
+           android:layout_alignParentStart="true" />
+
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="100dp"
+           android:layout_weight="1"
+           android:textSize="20sp"
+           android:background="@drawable/underline_buttons"
+           android:text="REVIEWS"
+           android:id="@+id/button2"
+           android:layout_alignParentEnd="true" />
+           -->
+
+    </RelativeLayout>
+</RelativeLayout>
+
