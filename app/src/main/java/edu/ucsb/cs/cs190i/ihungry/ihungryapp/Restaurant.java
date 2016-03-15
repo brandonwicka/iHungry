@@ -42,7 +42,7 @@ public class Restaurant implements Serializable {
         JSONObject location = json.optJSONObject("location");
         if (location != null) {
             JSONArray array = location.optJSONArray("address");
-            mAddress = array.optString(0);
+            mAddress = String.format("%s, %s, %s", array.optString(0), location.optString("city"), location.optString("state_code"));
             JSONObject coords = location.optJSONObject("coordinate");
             if (coords != null) {
                 mLatitude = coords.optDouble("latitude");
