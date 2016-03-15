@@ -47,7 +47,7 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
     SlidingTabLayout tabs;
     ArrayList<Restaurant> mRestaurants;
     TextView distance_away;
-    CharSequence titles[]={"INFO", "REVIEWS & DEALS"};
+    CharSequence titles[]={"INFO", "REVIEWS"};
     int numOfTabs = 2;
     static final int PERMISSIONS_FINE_LOCATION_REQUEST = 1234;
     GoogleApiClient mGoogleApiClient;
