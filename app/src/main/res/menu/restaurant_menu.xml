@@ -10,8 +10,7 @@
         android:orderInCategory="100"
         app:showAsAction="always"/>
         -->
-    <item android:id="@+id/next_restaurant"
-        android:icon="@drawable/restaurant"
+    <item android:id="@+id/next_restaurant_bar"
         android:title="NEXT RESTAURANT"
         android:orderInCategory="100"
         app:showAsAction="always"/>

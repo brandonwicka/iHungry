@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:text="2.9 MILES AWAY"
                 android:textColor="@color/white"
-                android:layout_marginRight="15dp"
+                android:layout_marginRight="20dp"
                 android:gravity="center"
                 android:textSize="17sp"
                 android:id="@+id/text_distance_away"

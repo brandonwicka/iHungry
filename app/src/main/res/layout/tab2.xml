@@ -49,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_below="@id/card_view"
         android:layout_marginTop="10dp"
-        android:layout_height="245dp"
+        android:layout_height="241dp"
         android:elevation="2dp">
 
 

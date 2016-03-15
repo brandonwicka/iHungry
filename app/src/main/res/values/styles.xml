@@ -48,12 +48,15 @@
         <!-- Customize your theme here. -->
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="colorPrimary">@android:color/transparent</item>
         <item name="colorPrimaryDark">@android:color/transparent</item>
-        <item name="colorAccent">@android:color/transparent</item>
+        <item name="colorAccent">@android:color/white</item>
         <item name="android:colorControlNormal">@color/white</item>
     </style>
+
 
     <style name="AppTheme.FlavoredMaterialLight2" parent="Theme.AlertDialogPro.Material.Light">
         <item name="colorPrimary">#000000</item>

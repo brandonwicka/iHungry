@@ -9,8 +9,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.speech.tts.TextToSpeech;
@@ -131,7 +135,7 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
 
-            case R.id.next_restaurant:
+            case R.id.next_restaurant_bar:
                 if (mRestaurants.size() > 1) {
                     mRestaurants.remove(mCurrentRestaurant);
                     mCurrentRestaurant = getRandomRestaurant(0);
