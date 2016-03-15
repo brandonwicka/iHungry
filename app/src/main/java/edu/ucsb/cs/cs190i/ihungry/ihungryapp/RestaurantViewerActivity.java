@@ -5,6 +5,7 @@ import android.Manifest;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.location.LocationServices;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -101,13 +102,16 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
                 LayoutInflater inflater = getLayoutInflater();
                 View dialogLayout = inflater.inflate(R.layout.image_dialog, null);
                 ImageView touchView = (ImageView) dialogLayout.findViewById(R.id.DialogImage);
-                String url1 = mCurrentRestaurant.getFoodImageUrl();
-                String originalImage = url1.substring(0, url1.lastIndexOf("/")) + "/o.jpg";
-                Picasso.with(getApplicationContext()).load(originalImage).fit().centerInside().into(touchView);
-                dialog.setView(dialogLayout);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                if (mCurrentRestaurant != null) {
+                    String url1 = mCurrentRestaurant.getFoodImageUrl();
+                    String originalImage = url1.substring(0, url1.lastIndexOf("/")) + "/o.jpg";
+                    Picasso.with(getApplicationContext()).load(originalImage).fit().centerInside().into(touchView);
+                    dialog.setView(dialogLayout);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-                dialog.show();
+                    dialog.show();
+                }
+
             }
         });
 
@@ -129,9 +133,24 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
                 return true;
 
             case R.id.next_restaurant:
-                mRestaurants.remove(mCurrentRestaurant);
-                mCurrentRestaurant = getRandomRestaurant(0);
-                updateUI();
+                if (mRestaurants.size() > 1) {
+                    mRestaurants.remove(mCurrentRestaurant);
+                    mCurrentRestaurant = getRandomRestaurant(0);
+                    updateUI();
+                } else {
+                    final Activity activity = this;
+                    createAlertDialogBuilder()
+                            .setTitle("Out of Restaurants")
+                            .setMessage("No more restaurants fit your specifications.")
+                            .setPositiveButton("Ok",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            NavUtils.navigateUpFromSameTask(activity);
+                                        }
+                                    }).show();
+                }
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -251,6 +270,11 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
                     .addApi(LocationServices.API)
                     .build();
         }
+    }
+
+    private android.support.v7.app.AlertDialog.Builder createAlertDialogBuilder() {
+
+        return new android.support.v7.app.AlertDialog.Builder(this, R.style.AppTheme_FlavoredMaterialLight2);
     }
 
     @Override
