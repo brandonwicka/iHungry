@@ -103,8 +103,7 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
                 View dialogLayout = inflater.inflate(R.layout.image_dialog, null);
                 ImageView touchView = (ImageView) dialogLayout.findViewById(R.id.DialogImage);
                 if (mCurrentRestaurant != null) {
-                    String url1 = mCurrentRestaurant.getFoodImageUrl();
-                    String originalImage = url1.substring(0, url1.lastIndexOf("/")) + "/o.jpg";
+                    String originalImage = mCurrentRestaurant.getFoodImageUrl();
                     Picasso.with(getApplicationContext()).load(originalImage).fit().centerInside().into(touchView);
                     dialog.setView(dialogLayout);
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -230,8 +229,7 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
     private void updateUI() {
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         String foodImageUrl = mCurrentRestaurant.getFoodImageUrl();
-        String originalImage = foodImageUrl.substring(0, foodImageUrl.lastIndexOf("/")) + "/o.jpg";
-        Picasso.with(getApplicationContext()).load(originalImage).fit().centerCrop().into(imageView);
+        Picasso.with(getApplicationContext()).load(foodImageUrl).fit().centerCrop().into(imageView);
 
         Location rest_loc = new Location("");
         rest_loc.setLatitude(mCurrentRestaurant.getLatitude());

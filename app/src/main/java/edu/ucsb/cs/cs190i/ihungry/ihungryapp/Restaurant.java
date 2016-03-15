@@ -52,11 +52,20 @@ public class Restaurant implements Serializable {
             }
         }
         mRating = json.optDouble("rating");
-        mRatingImageUrl = json.optString("snippet_image_url");
+        String url2 = json.optString("snippet_image_url");
+        if (url2 != null)
+            mRatingImageUrl = url2.substring(0, url2.lastIndexOf("/")) + "/o.jpg";
+        else
+            mRatingImageUrl = "";
         mRatingText = json.optString("snippet_text");
         mDisplayPhoneNumber = json.optString("display_phone");
         mCallablePhoneNumber = json.optString("phone");
-        mFoodImageUrl = json.optString("image_url");
+        String url1 = json.optString("image_url");
+        if (url1 != null)
+            mFoodImageUrl = url1.substring(0, url1.lastIndexOf("/")) + "/o.jpg";
+        else
+            mFoodImageUrl = "";
+
         JSONArray categories = json.optJSONArray("categories");
         mCategories = new ArrayList<String>();
         if (categories != null) {
