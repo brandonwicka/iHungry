@@ -13,6 +13,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="350dp"
+        android:background="@color/colorPrimary"
+        android:animateLayoutChanges="true"
         tools:context="edu.ucsb.cs.cs190i.ihungry.ihungryapp.RestaurantViewerActivity"
         android:id="@+id/relativeLayout">
 
@@ -50,7 +52,7 @@
                 android:textColor="@color/white"
                 android:layout_marginRight="20dp"
                 android:gravity="center"
-                android:textSize="17sp"
+                android:textSize="19sp"
                 android:id="@+id/text_distance_away"
                 android:fontFamily="sans-serif-thin"
 
