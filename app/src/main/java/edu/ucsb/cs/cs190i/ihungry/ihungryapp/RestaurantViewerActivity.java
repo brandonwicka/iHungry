@@ -129,7 +129,9 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
                 return true;
 
             case R.id.next_restaurant:
-                Toast.makeText(getApplicationContext(), "*shows next restaurant*", Toast.LENGTH_SHORT).show();
+                mRestaurants.remove(mCurrentRestaurant);
+                mCurrentRestaurant = getRandomRestaurant(0);
+                updateUI();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
