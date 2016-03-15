@@ -67,7 +67,7 @@ public class RestaurantViewerActivity extends AppCompatActivity implements Googl
         setContentView(R.layout.activity_restaurant_viewer);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.rsz_1backarrow);
+        getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_arrow);
         getSupportActionBar().setElevation(0);
         if(savedInstanceState != null) {
             mCurrentRestaurant = (Restaurant) savedInstanceState.getSerializable(RESTAURANT_KEY);
