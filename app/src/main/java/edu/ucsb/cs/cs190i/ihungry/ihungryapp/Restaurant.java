@@ -24,6 +24,8 @@ public class Restaurant implements Serializable {
     private String mFoodImageUrl;
     private ArrayList<String> mCategories;
     private String mUrl;
+    private String mRatingImageUrl;
+    private String mRatingText;
     private String mAddress;
 
     public Restaurant(String name, LatLng latLng){
@@ -50,6 +52,8 @@ public class Restaurant implements Serializable {
             }
         }
         mRating = json.optDouble("rating");
+        mRatingImageUrl = json.optString("snippet_image_url");
+        mRatingText = json.optString("snippet_text");
         mDisplayPhoneNumber = json.optString("display_phone");
         mCallablePhoneNumber = json.optString("phone");
         mFoodImageUrl = json.optString("image_url");
@@ -124,8 +128,40 @@ public class Restaurant implements Serializable {
         return mAddress;
     }
 
+    public String getRatingImageUrl() {
+        return mRatingImageUrl;
+    }
+
+    public String getRatingText() {
+        return mRatingText;
+    }
+
     @Override
     public String toString() {
-        return String.format("ID: %s\nName: %s\nLat: %f\nLon: %f\nRating: %f\nImage Url: %s\nCategories: %s\nPhone: %s and %s\nUrl: %s\nAddress: %s\n", mObjectId, mName, mLatitude, mLongitude, mRating, mFoodImageUrl, mCategories.toString(), mCallablePhoneNumber, mDisplayPhoneNumber, mUrl, mAddress);
+        return String.format("ID: %s\n" +
+                "Name: %s\n" +
+                "Lat: %f\n" +
+                "Lon: %f\n" +
+                "Rating: %f\n" +
+                "Image Url: %s\n" +
+                "Categories: %s\n" +
+                "Phone: %s and %s\n" +
+                "Url: %s\n" +
+                "Address: %s\n" +
+                        "Rating image url: %s\n" +
+                        "Rating text: %s\n",
+                mObjectId,
+                mName,
+                mLatitude,
+                mLongitude,
+                mRating,
+                mFoodImageUrl,
+                mCategories.toString(),
+                mCallablePhoneNumber,
+                mDisplayPhoneNumber,
+                mUrl,
+                mAddress,
+                mRatingImageUrl,
+                mRatingText);
     }
 }
